@@ -1,5 +1,5 @@
 import React from 'react'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 
 import { AdminBar } from './_components/AdminBar'
