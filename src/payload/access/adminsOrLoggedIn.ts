@@ -1,3 +1,4 @@
+// eslint-disable-next-line prettier/prettier
 import type { Access, AccessArgs } from 'payload/config'
 
 import { checkRole } from '../collections/Users/checkRole'
