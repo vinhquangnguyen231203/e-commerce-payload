@@ -1,4 +1,5 @@
 import React from 'react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Metadata } from 'next'
 
 import { AdminBar } from './_components/AdminBar'
@@ -23,6 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <AdminBar />
           {/* @ts-expect-error */}
           <Header />
+          <SpeedInsights />
           {children}
           {/* @ts-expect-error */}
           <Footer />
