@@ -1,3 +1,31 @@
+![1721100638272](image/README/1721100638272.png)
+
+![1721100661022](image/README/1721100661022.png)
+
+![1721100695505](image/README/1721100695505.png)
+
+![1721100727910](image/README/1721100727910.png)
+
+![1721100755649](image/README/1721100755649.png)
+
+![1721100812826](image/README/1721100812826.png)
+
+![1721100828210](image/README/1721100828210.png)
+
+![1721100851982](image/README/1721100851982.png)
+
+![1721100904547](image/README/1721100904547.png)
+
+![1721100922177](image/README/1721100922177.png)
+
+![1721100952869](image/README/1721100952869.png)
+
+![1721100985762](image/README/1721100985762.png)
+
+![1721101003067](image/README/1721101003067.png)
+
+![1721101114360](image/README/1721101114360.png)
+
 # Payload E-Commerce Template
 
 This is the official [Payload E-Commerce Template](https://github.com/payloadcms/payload/blob/main/templates/ecommerce). Use it to power e-commerce businesses and online stores of all sizes. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
@@ -47,9 +75,9 @@ If you have not done so already, you need to have standalone copy of this repo o
 ### Development
 
 1. First [clone the repo](#clone) if you have not done so already
-1. `cd my-project && cp .env.example .env` to copy the example environment variables
-1. `yarn && yarn dev` to install dependencies and start the dev server
-1. `open http://localhost:3000` to open the app in your browser
+2. `cd my-project && cp .env.example .env` to copy the example environment variables
+3. `yarn && yarn dev` to install dependencies and start the dev server
+4. `open http://localhost:3000` to open the app in your browser
 
 That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. To begin accepting payment, follow the [Stripe](#stripe) guide. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
 
@@ -66,7 +94,6 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections)  do
   Users are auth-enabled and encompass both admins and customers based on the value of their `roles` field. Only `admin` users can access your admin panel to manage your store whereas `customer` can authenticate on your front-end to create [shopping carts](#shopping-cart) and place [orders](#orders) but have limited access to the platform. See [Access Control](#access-control) for more details.
 
   For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/main/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
-
 - #### Products
 
   Products are linked to Stripe via a custom select field that is dynamically populated in the sidebar of each product. This field fetches all available products in the background and displays them as options. Once a product has been selected, prices get automatically synced between Stripe and Payload through [Payload Hooks](https://payloadcms.com/docs/hooks) and [Stripe Webhooks](https://stripe.com/docs/webhooks). See [Stripe](#stripe) for more details.
@@ -74,19 +101,15 @@ See the [Collections](https://payloadcms.com/docs/configuration/collections)  do
   All products are layout builder enabled so you can generate unique pages for each product using layout building blocks, see [Layout Builder](#layout-builder) for more details.
 
   Products can also restrict access to content or digital assets behind a paywall (gated content), see [Paywall](#paywall) for more details.
-
 - #### Orders
 
   Orders are created when a user successfully completes a checkout. They contain all the data about the order including the products purchased, the total price, and the user who placed the order. See [Checkout](#checkout) for more details.
-
 - #### Pages
 
   All pages are layout builder enabled so you can generate unique layouts for each page using layout-building blocks, see [Layout Builder](#layout-builder) for more details.
-
 - #### Media
 
   This is the uploads enabled collection used by products and pages to contain media like images, videos, downloads, and other assets.
-
 - #### Categories
 
   A taxonomy used to group products together. Categories can be nested inside of one another, for example "Courses > Technology". See the official [Payload Nested Docs Plugin](https://github.com/payloadcms/plugin-nested-docs) for more details.
@@ -98,7 +121,6 @@ See the [Globals](https://payloadcms.com/docs/configuration/globals) docs for de
 - `Header`
 
   The data required by the header on your front-end like nav links.
-
 - `Footer`
 
   Same as above but for the footer of your site.
@@ -145,11 +167,12 @@ Logged-in users can have their shopping carts saved to their profiles as they sh
 Payload itself handles no currency exchange. All payments are processed and billed using [Stripe](https://stripe.com). This means you must have access to a Stripe account via an API key, see [Connect Stripe](#connect-stripe) for how to get one. When you create a product in Payload that you wish to sell, it must be connected to a Stripe product by selecting one from the field in the product's sidebar, see [Products](#products) for more details. Once set, data is automatically synced between the two platforms in the following ways:
 
 1. Stripe to Payload using [Stripe Webhooks](https://stripe.com/docs/webhooks):
+
    - `product.created`
    - `product.updated`
    - `price.updated`
+2. Payload to Stripe using [Payload Hooks](https://payloadcms.com/docs/hooks/overview):
 
-1. Payload to Stripe using [Payload Hooks](https://payloadcms.com/docs/hooks/overview):
    - `user.create`
 
 For more details on how to extend this functionality, see the the official [Payload Stripe Plugin](https://github.com/payloadcms/plugin-stripe).
@@ -159,21 +182,21 @@ For more details on how to extend this functionality, see the the official [Payl
 To integrate with Stripe, follow these steps:
 
 1. You will first need to create a [Stripe](https://stripe.com) account if you do not already have one.
-1. Retrieve your [Stripe API keys](https://dashboard.stripe.com/test/apikeys) and paste them into your `env`:
+2. Retrieve your [Stripe API keys](https://dashboard.stripe.com/test/apikeys) and paste them into your `env`:
    ```bash
    STRIPE_SECRET_KEY=
    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
    ```
-1. In another terminal, listen for webhooks (optional):
+3. In another terminal, listen for webhooks (optional):
    ```bash
    stripe login # follow the prompts
    yarn stripe:webhooks
    ```
-1. Paste the given webhook signing secret into your `env`:
+4. Paste the given webhook signing secret into your `env`:
    ```bash
    STRIPE_WEBHOOKS_SIGNING_SECRET=
    ```
-1. Reboot Payload to ensure that Stripe connects and the webhooks are registered.
+5. Reboot Payload to ensure that Stripe connects and the webhooks are registered.
 
 ## Checkout
 
@@ -279,7 +302,7 @@ If you prefer another front-end framework or would like to use Payload as a stan
 
 For more details on how setup a custom server, see the official [Custom Server Example](https://github.com/payloadcms/payload/tree/main/examples/custom-server).
 
-##  Development
+## Development
 
 To spin up this example locally, follow the [Quick Start](#quick-start). Then [Connect Stripe](#connect-stripe) to enable payments, and [Seed](#seed) the database with a few products and pages.
 
@@ -288,8 +311,8 @@ To spin up this example locally, follow the [Quick Start](#quick-start). Then [C
 Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
 
 1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
+2. Next run `docker-compose up`
+3. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
 
 That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
 
@@ -299,28 +322,27 @@ To seed the database with a few products and pages you can run `yarn seed`. This
 
 > NOTICE: seeding the database is destructive because it drops your current database to populate a fresh one from the seed template. Only run this command if you are starting a new project or can afford to lose your current data.
 
-
 ### Conflicting routes
 
->In a monorepo when routes are bootstrapped to the same host, they can conflict with Payload's own routes if they have the same name. In our template we've named the Nextjs API routes to `next` to avoid this conflict.
+> In a monorepo when routes are bootstrapped to the same host, they can conflict with Payload's own routes if they have the same name. In our template we've named the Nextjs API routes to `next` to avoid this conflict.
 >
->This can happen with any other routes conflicting with Payload such as `admin` and we recommend using different names for custom routes.  
->Alternatively you can also rename Payload's own routes via the [configuration](https://payloadcms.com/docs/configuration/overview).
+> This can happen with any other routes conflicting with Payload such as `admin` and we recommend using different names for custom routes.
+> Alternatively you can also rename Payload's own routes via the [configuration](https://payloadcms.com/docs/configuration/overview).
 
 ## Production
 
 To run Payload in production, you need to build and serve the Admin panel. To do so, follow these steps:
 
 1. Invoke the `payload build` script by running `yarn build` or `npm run build` in your project root. This creates a `./build` directory with a production-ready admin bundle.
-1. Finally run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
-1. When you're ready to go live, see [Deployment](#deployment) for more details.
+2. Finally run `yarn serve` or `npm run serve` to run Node in production and serve Payload from the `./build` directory.
+3. When you're ready to go live, see [Deployment](#deployment) for more details.
 
 ### Deployment
 
 Before deploying your app, you need to:
 
 1. Switch [your Stripe account to live mode](https://stripe.com/docs/test-mode) and update your [Stripe API keys](https://dashboard.stripe.com/test/apikeys). See [Connect Stripe](#connect-stripe) for more details.
-1. Ensure your app builds and serves in production. See [Production](#production) for more details.
+2. Ensure your app builds and serves in production. See [Production](#production) for more details.
 
 The easiest way to deploy your project is to use [Payload Cloud](https://payloadcms.com/new/import), a one-click hosting solution to deploy production-ready instances of your Payload apps directly from your GitHub repo. You can also deploy your app manually, check out the [deployment documentation](https://payloadcms.com/docs/production/deployment) for full details.
 
